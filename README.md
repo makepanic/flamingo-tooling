@@ -1,7 +1,10 @@
 # Flamingo-tooling
 
+[http://makepanic.github.io/flamingo-tooling/](http://makepanic.github.io/flamingo-tooling/)
+
 This README outlines the details of collaborating on this Ember application.
 A short introduction of this app could easily go here.
+
 
 ## Prerequisites
 
