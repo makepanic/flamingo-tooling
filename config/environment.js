@@ -4,8 +4,8 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'flamingo-tooling',
     environment: environment,
-    baseURL: '/',
-    locationType: 'auto',
+    baseURL: '/flamingo-tooling',
+    locationType: 'hash',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build

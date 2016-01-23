@@ -7,7 +7,7 @@ export default Ember.Route.extend({
   db: service(),
 
   model(){
-    return this.get('ajax').request('/assets/benchmarks.json')
+    return this.get('ajax').request('/flamingo-tooling/assets/benchmarks.json')
       .then(benchmarks => {
         benchmarks.forEach(benchmark =>
           benchmark.t = new Date(benchmark.t));
