@@ -1,0 +1,21 @@
+@import "./colors";
+
+body{
+  background: $white-1;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+.highcharts-series-group{
+  path[fill="rgba(31, 119, 180, .25)"],
+  path[fill="rgba(0, 0, 0, .25)"]
+  {
+    transform: translateX(10px);
+  }
+  path[fill="rgba(255, 127, 14, .25)"],
+  path[fill="rgba(18, 124, 193, .25)"]{
+    transform: translateX(-10px);
+  }
+}

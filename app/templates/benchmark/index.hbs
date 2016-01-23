@@ -1,0 +1,28 @@
+<table class="ui celled striped selectable table">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Date</th>
+        <th>Version</th>
+        <th>Node</th>
+        <th>CPU</th>
+        <th>Tags</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {{#each benchmarks key="id" as |benchmark|}}
+        <tr {{action 'openBenchmark' benchmark}}>
+            <td>{{shorten benchmark.id 8}}</td>
+            <td>{{moment-format benchmark.t 'YYYY-MM-DD HH:mm:ss'}}</td>
+            <td>{{benchmark.v}}</td>
+            <td>{{benchmark.fp.libs.node.node}}</td>
+            <td>{{benchmark.fp.os.cpus.0.model}}</td>
+            <td>{{#each benchmark.tags as |tag|}}
+                <div class="ui label basic">{{tag}}</div>
+            {{/each}}
+            </td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>

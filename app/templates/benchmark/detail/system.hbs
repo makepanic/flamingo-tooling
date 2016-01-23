@@ -1,0 +1,79 @@
+<div class="ui horizontal segments">
+    <div class="ui segment">
+        <h4 class="ui header">OS</h4>
+        <div class="ui list">
+            <div class="item">
+                <i class="icon {{model.fp.os.platform}}"></i> {{model.fp.os.type}} {{model.fp.os.arch}}
+            </div>
+            <div class="item">
+              {{model.fp.os.release}}
+            </div>
+        </div>
+    </div>
+    <div class="ui segment">
+        <h4 class="ui header">CPU ({{model.fp.os.cpus.length}})</h4>
+        <div class="ui list">
+          {{#each model.fp.os.cpus as |cpu|}}
+              <span class="item">{{cpu.model}} ({{to-fixed (to-ghz cpu.speed) 2}}GHz)</span>
+          {{/each}}
+        </div>
+    </div>
+    <div class="ui segment">
+        <h4 class="ui header">Memory (free)</h4>
+        <div class="ui list">
+            <div class="item">
+              {{to-fixed (to-gb model.fp.os.totalMem) 2}} GB ({{to-fixed (to-gb model.fp.os.freeMem) 2}}GB)
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ui fluid card">
+    <div class="content">
+        <div class="header">npm dependencies</div>
+    </div>
+    <div class="content">
+        <div class="ui grid">
+            <div class="five column row">
+              {{#each-in model.deps as |name version|}}
+                  <div class="column">
+                      <div class="content">
+                          <a href="https://www.npmjs.com/package/{{name}}">{{name}}</a> <span
+                              title="{{version}}">{{shorten version 7}}</span>
+                      </div>
+                  </div>
+              {{/each-in}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ui fluid card">
+    <div class="content">
+        <div class="header">Libs</div>
+    </div>
+    <div class="content">
+        <div class="ui grid">
+            <div class="five column row">
+              {{#each-in model.fp.libs as |lib version|}}
+                  <div class="column">
+                      <div class="content">
+                          <h5>{{lib}}</h5>
+                        {{#if (isString version)}}
+                            <p>{{version}}</p>
+                        {{else}}
+                            <div class="ui list">
+                              {{#each-in version as |name version|}}
+                                  <div class="item">
+                                      <strong>{{name}}</strong> {{version}}
+                                  </div>
+                              {{/each-in}}
+                            </div>
+                        {{/if}}
+                      </div>
+                  </div>
+              {{/each-in}}
+            </div>
+        </div>
+    </div>
+</div>

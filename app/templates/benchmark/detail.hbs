@@ -1,0 +1,26 @@
+<div class="ui fluid card">
+    <div class="content">
+        <div class="header">{{model.id}}</div>
+        <div class="meta">
+            <span class="right floated time">{{moment-format model.t 'YYYY-MM-DD'}}</span>
+            <span class="category">{{model.v}}</span>
+        </div>
+        <div class="description">
+            <div class="ui label basic blue">node@{{model.fp.libs.node.node}}</div>
+          {{#each model.tags as |tag|}}
+              <div class="ui label basic">{{tag}}</div>
+          {{/each}}
+        </div>
+    </div>
+</div>
+
+<div class="ui secondary pointing menu">
+  {{#link-to 'benchmark.detail.system' class='item'}}
+      System
+  {{/link-to}}
+  {{#link-to 'benchmark.detail.suites' class='item'}}
+      Suites
+  {{/link-to}}
+</div>
+
+{{outlet}}

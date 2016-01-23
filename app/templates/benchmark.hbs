@@ -1,0 +1,109 @@
+<div class="ui celled stackable grid">
+    <div class="four wide tablet two wide computer column">
+
+        <h4 class="ui header">Filters</h4>
+
+        <div class="ui vertical text menu">
+            <div class="item">
+                <div class="header">Node version</div>
+                <div class="menu selection">
+                  {{#each nodes as |node|}}
+                    {{#if (inArray skipNode node)}}
+                        <div class="item cursor-pointer" {{action 'toggleFilter' 'skipNode' node}}><i
+                                class="radio icon"></i> {{node}}
+                        </div>
+                    {{else}}
+                        <div class="item cursor-pointer active" {{action 'toggleFilter' 'skipNode' node}}><i
+                                class="blue selected radio icon"></i> {{node}}</div>
+                    {{/if}}
+                  {{/each}}
+                </div>
+            </div>
+            <div class="item">
+                <div class="header">Flamingo version</div>
+                <div class="menu">
+                  {{#each flamingoVersions as |version|}}
+                    {{#if (inArray skipVersion version)}}
+                        <div class="item cursor-pointer" {{action 'toggleFilter' 'skipVersion' version}}><i
+                                class="radio icon"></i> {{version}}
+                        </div>
+                    {{else}}
+                        <div class="item active cursor-pointer" {{action 'toggleFilter' 'skipVersion' version}}><i
+                                class="blue selected radio icon"></i> {{version}}</div>
+                    {{/if}}
+                  {{/each}}
+                </div>
+            </div>
+            <div class="item">
+                <div class="header">#Tags</div>
+                <div class="menu">
+                  {{#each tags as |tag|}}
+                    {{#if (inArray skipTag tag)}}
+                        <div class="item cursor-pointer" {{action 'toggleFilter' 'skipTag' tag}}><i
+                                class="radio icon"></i> {{tag}}
+                        </div>
+                    {{else}}
+                        <div class="item active cursor-pointer" {{action 'toggleFilter' 'skipTag' tag}}><i
+                                class="blue selected radio icon"></i> {{tag}}</div>
+                    {{/if}}
+                  {{/each}}
+                </div>
+            </div>
+          {{#if false}}
+              <div class="item">
+                  <div class="header">Time</div>
+                  <div class="menu">
+                    {{#each dates as |date|}}
+                      {{#if date.active}}
+                          <div class="item active cursor-pointer"><i class="selected radio icon"></i> {{date.title}}
+                          </div>
+                      {{else}}
+                          <div class="item cursor-pointer"><i class="icon radio"></i> {{date.title}}</div>
+                      {{/if}}
+                    {{/each}}
+                  </div>
+              </div>
+          {{/if}}
+        </div>
+
+    </div>
+    <div class="twelve wide tablet fourteen wide computer column">
+        <div class="ui secondary pointing menu">
+          {{#link-to 'benchmark.index' class='item' currentWhen='benchmark.index benchmark.detail'}}
+              Benchmarks
+          {{/link-to}}
+          {{#link-to 'benchmark.graphs' class='item'}}
+              Graphs
+          {{/link-to}}
+        </div>
+
+        <div class="ui grid celled">
+            <div class="ui large screen only four wide column">
+
+                <div class="ui list">
+                  {{#each sortedModel as |benchmark|}}
+                    {{#link-to 'benchmark.detail' benchmark class='ui fluid card item'}}
+                        <div class="content">
+                            <div class="header">{{shorten benchmark.id 8}}</div>
+                            <div class="meta">
+                                <span class="right floated time">{{moment-format benchmark.t 'YYYY-MM-DD'}}</span>
+                                <span class="category">{{benchmark.v}}</span>
+                            </div>
+                            <div class="description">
+                                <div class="ui label basic blue">node@{{benchmark.fp.libs.node.node}}</div>
+                              {{#each benchmark.tags as |tag|}}
+                                  <div class="ui label basic">{{tag}}</div>
+                              {{/each}}
+                            </div>
+                        </div>
+                    {{/link-to}}
+                  {{/each}}
+                </div>
+
+            </div>
+            <div class="ui sixteen wide computer twelve wide large screen column">
+              {{outlet}}
+            </div>
+        </div>
+    </div>
+</div>

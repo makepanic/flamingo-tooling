@@ -1,0 +1,19 @@
+<div class="ui computer reversed grid">
+    <div class="sixteen wide tablet five wide computer three wide large screen column">
+        <div class="ui vertical fluid menu">
+          {{#each model.suites as |suite|}}
+              <div class="item">
+                  <div class="header">{{suite.name}}</div>
+                  <div class="menu">
+                    {{#each suite.topics as |topic|}}
+                      {{#link-to 'benchmark.detail.suites.suite.topic' benchmark.model.id suite.name topic.name class="item"}}
+                        {{topic.name}}
+                      {{/link-to}}
+                    {{/each}}
+                  </div>
+              </div>
+          {{/each}}
+        </div>
+    </div>
+    <div class="sixteen wide tablet eleven wide computer thirteen wide large screen column">{{outlet}}</div>
+</div>
