@@ -1,6 +1,12 @@
-<div class="ui pointing menu">
-    <div class="header item">Flamingo</div>
+<div class="ui pointing secondary menu">
+  {{#link-to 'index' class='header item'}}Flamingo{{/link-to}}
   {{#link-to 'benchmark' class='item' }}Benchmarks{{/link-to}}
+
+    <div class="right menu">
+        <a class="ui item" href="https://github.com/makepanic/flamingo-tooling">
+            <i class="fork icon"></i> view source
+        </a>
+    </div>
 </div>
 
 <div class="ui fluid container">

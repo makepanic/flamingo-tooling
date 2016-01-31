@@ -1,0 +1,32 @@
+<div class="ui middle aligned center aligned grid">
+    <div style="margin-top: 200px;" class="four wide column">
+        <div class="ui fluid card">
+            <div class="content">
+                <div class="header">flamingo tooling</div>
+            </div>
+            <div class="content">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAuElEQVQ4jbWRMQqDQBBFnyGVSJpUkj72e4/UphUP4FlyAEkteIecIPZeQAlYiW67qTagzKIo+eWy78+fP/Av9Ulm+iQzS/88F9zqAYDQDzg9H+I/gIP0+O4+REXuNXrEGm1SHaeLK+yGxRXqODWNHoHlMsVy6jg1oR8ATDqQChUTWHAOt3pgnkY0iIp8MsXCm1QqZUqltl/Dwi6Towt83e4/oARzvlyhqtZPtga74s+TSHKecQ0M8AXIOlSRGTKPKQAAAABJRU5ErkJggg=="
+                     class="pixelate ui small image">
+
+                <div class="ui divider"></div>
+
+                <div class="ui two tiny statistics">
+                    <div class="statistic">
+                        <div class="value">{{numBuilds}}</div>
+                        <div class="label">builds</div>
+                    </div>
+                    <div class="statistic">
+                        <div class="value">{{latestVersion}}</div>
+                        <div class="label">latest version</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="extra content">
+                {{#link-to 'benchmark' class='ui fluid large teal submit button'}}view benchmarks{{/link-to}}
+            </div>
+        </div>
+    </div>
+</div>
+
+{{outlet}}
