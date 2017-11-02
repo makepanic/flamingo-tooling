@@ -8,7 +8,7 @@
                 <div class="header">Node version</div>
                 <div class="menu selection">
                   {{#each nodes as |node|}}
-                    {{#if (inArray skipNode node)}}
+                    {{#if (in-array skipNode node)}}
                         <div class="item cursor-pointer" {{action 'toggleFilter' 'skipNode' node}}><i
                                 class="radio icon"></i> {{node}}
                         </div>
@@ -23,7 +23,7 @@
                 <div class="header">Flamingo version</div>
                 <div class="menu">
                   {{#each flamingoVersions as |version|}}
-                    {{#if (inArray skipVersion version)}}
+                    {{#if (in-array skipVersion version)}}
                         <div class="item cursor-pointer" {{action 'toggleFilter' 'skipVersion' version}}><i
                                 class="radio icon"></i> {{version}}
                         </div>
@@ -38,7 +38,7 @@
                 <div class="header">#Tags</div>
                 <div class="menu">
                   {{#each tags as |tag|}}
-                    {{#if (inArray skipTag tag)}}
+                    {{#if (in-array skipTag tag)}}
                         <div class="item cursor-pointer" {{action 'toggleFilter' 'skipTag' tag}}><i
                                 class="radio icon"></i> {{tag}}
                         </div>
@@ -69,7 +69,7 @@
     </div>
     <div class="twelve wide tablet fourteen wide computer column">
         <div class="ui secondary pointing menu">
-          {{#link-to 'benchmark.index' class='item' currentWhen='benchmark.index benchmark.detail'}}
+          {{#link-to 'benchmark.index' class='item' current-when='benchmark.index benchmark.detail'}}
               Benchmarks
           {{/link-to}}
           {{#link-to 'benchmark.graphs' class='item'}}
@@ -101,7 +101,7 @@
                 </div>
 
             </div>
-            <div class="ui sixteen wide computer twelve wide large screen column">
+            <div class="ui twelve wide computer column">
               {{outlet}}
             </div>
         </div>

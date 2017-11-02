@@ -1,14 +1,24 @@
-/*jshint node:true*/
-/* global require, module */
-var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+/* eslint-env node */
+'use strict';
+
+const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
-  var app = new EmberApp(defaults, {
+  let app = new EmberApp(defaults, {
+    babel: {
+      includePolyfill: true,
+    },
     // Add options here
     emberHighCharts: {
       includeHighCharts: true,
       includeHighChartsMore: true,
       includeHighCharts3D: true
+    },
+
+    codemirror: {
+      modes: ['javascript'],
+      lineNumbers: true,
+      themes: ['mdn-like']
     }
   });
 
@@ -25,9 +35,8 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
-  //app.import(app.bowerDirectory + '/bootstrap/dist/css/bootstrap.min.css');
   app.import(app.bowerDirectory + '/semantic/dist/semantic.min.css');
-  app.import(app.bowerDirectory + '/forerunner/js/dist/fdb-all.min.js');
+  app.import(app.bowerDirectory + '/color-hash/dist/color-hash.js');
 
   return app.toTree();
 };

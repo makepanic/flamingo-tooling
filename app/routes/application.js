@@ -1,22 +1,24 @@
 import Ember from 'ember';
 
-const {RSVP} = Ember;
-const {service} = Ember.inject;
+const {RSVP, inject: {service}} = Ember;
 
 export default Ember.Route.extend({
   ajax: service(),
   db: service(),
 
-  model(){
-    return RSVP.hash({
-      benchmarks: this.get('ajax').request('/flamingo-tooling/assets/benchmarks.json')
-        .then(benchmarks => {
-          benchmarks.forEach(benchmark =>
-            benchmark.t = new Date(benchmark.t));
+  model() {
+    const store = this.get('store');
 
-          this.get('db.benchmark').insert(benchmarks);
-          return benchmarks;
-        })
-    });
+    return this.get('ajax').request('/flamingo-tooling/assets/benchmarks.json')
+      .then(data => {
+        let promises = data.benchmarks.map(id => {
+          return store.findRecord('benchmark', id)
+        });
+
+        return RSVP.all(promises).catch(e => {
+          debugger;
+          throw e;
+        });
+      })
   },
 });

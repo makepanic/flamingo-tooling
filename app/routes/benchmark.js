@@ -4,7 +4,7 @@ const {service} = Ember.inject;
 
 export default Ember.Route.extend({
   model(){
-    return this.modelFor('application').benchmarks;
+    return this.modelFor('application');
   },
 
   actions: {

@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import semver from 'npm:semver';
 
-const {computed} = Ember;
+const {computed, get} = Ember;
 
 export default Ember.Controller.extend({
   queryParams: ['skipNode', 'skipTag', 'skipVersion', 'date'],
@@ -22,13 +22,13 @@ export default Ember.Controller.extend({
     function filterFunction(benchmark) {
       let valid = true;
       if (valid && skipNode) {
-        valid = skipNode.indexOf(benchmark.fp.libs.node.node) === -1;
+        valid = skipNode.indexOf(get(benchmark, 'fp.libs.node.node')) === -1;
       }
       if (valid && skipTag) {
-        valid = !benchmark.tags.some(tag => skipTag.indexOf(tag) !== -1);
+        valid = !get(benchmark, 'tags').some(tag => skipTag.indexOf(tag) !== -1);
       }
       if (valid && skipVersion) {
-        valid = skipVersion.indexOf(benchmark.v) === -1;
+        valid = skipVersion.indexOf(get(benchmark, 'v')) === -1;
       }
       return valid;
     }
@@ -38,19 +38,19 @@ export default Ember.Controller.extend({
 
   nodes: computed('model.[]', function(){
     return Object.keys(this.get('model').reduce((all, benchmark) => {
-      all[benchmark.fp.libs.node.node] = true;
+      all[get(benchmark, 'fp.libs.node.node')] = true;
       return all;
     }, {})).sort(semver.compare).reverse();
   }),
   flamingoVersions: computed('model.[]', function(){
     return Object.keys(this.get('model').reduce((all, benchmark) => {
-      all[benchmark.v] = true;
+      all[get(benchmark, 'v')] = true;
       return all;
     }, {})).sort(semver.compare).reverse();
   }),
   tags: computed('model.[]', function(){
     return Object.keys(this.get('model').reduce((all, benchmark) => {
-      all[benchmark.tags] = true;
+      all[get(benchmark, 'tags')] = true;
       return all;
     }, {}));
   }),

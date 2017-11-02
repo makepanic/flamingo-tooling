@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+const {get} = Ember;
+
 export default Ember.Route.extend({
   serialize: function(model) {
     return { topic_name: model.name };
@@ -7,7 +9,7 @@ export default Ember.Route.extend({
 
   model({topic_name}) {
     let suite = this.modelFor('benchmark.detail.suites.suite');
-    return suite.topics.filter(t => t.name === topic_name)[0];
+    return get(suite, 'topics').find(t => get(t, 'name') === topic_name);
   },
 
   afterModel(model) {

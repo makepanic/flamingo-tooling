@@ -7,8 +7,9 @@ export default Ember.Route.extend({
     }
   },
   model({id}){
-    return this.modelFor('benchmark').filter(b => b.id === id)[0];
+    return this.get('store').findRecord('benchmark', id);
   },
+
   afterModel(model) {
     this.set('breadCrumb', {
       title: model.id

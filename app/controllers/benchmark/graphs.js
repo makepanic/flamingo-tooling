@@ -1,15 +1,14 @@
 import Ember from 'ember';
 import semver from 'npm:semver';
 
-const {computed, inject} = Ember;
+const {computed, get} = Ember;
 
 export default Ember.Controller.extend({
-  benchmark: inject.controller('benchmark'),
-  benchmarks: computed.alias('benchmark.sortedModel'),
+  benchmarks: computed.alias('model'),
 
   versions: computed('benchmarks', function () {
     return Object.keys(this.get('benchmarks').reduce((all, bench) => {
-      all[bench.v] = true;
+      all[get(bench, 'v')] = true;
       return all;
     }, {})).sort(semver.compare);
   }),
@@ -24,11 +23,11 @@ export default Ember.Controller.extend({
       groups = {};
 
     this.get('benchmarks').forEach(benchmark => {
-      let b = benchmark.suites[0];
+      let b = get(benchmark, 'suites.firstObject');
 
-      b.topics.forEach(topic => {
-        topic.inputs.forEach(input => {
-          input.variants.forEach(variant => {
+      get(b, 'topics').forEach(topic => {
+        get(topic, 'inputs').forEach(input => {
+          get(input, 'variants').forEach(variant => {
             let key = `${variant.name}`;
             groups[key] = groups[key] || {
                 name: `${variant.name}`,
@@ -36,7 +35,7 @@ export default Ember.Controller.extend({
                 data: []
               };
 
-            groups[key].data.push([versions.indexOf(benchmark.v), variant.hz]);
+            groups[key].data.push([versions.indexOf(get(benchmark, 'v')), variant.hz]);
           });
         });
       });
